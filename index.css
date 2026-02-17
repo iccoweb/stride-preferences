@@ -1,10 +1,18 @@
-/* Global Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import "tailwindcss";
+
+@theme {
+  --color-stride-blue: #2127C3;
+  --color-stride-blue-hover: #1a1f9e;
+  --color-stride-navy: #000F42;
+  --color-stride-light-blue: #B3E4FF;
+  --color-stride-orange: #F06500;
+  --color-stride-text: #2D2D2D;
+  --color-stride-muted: #595959;
+  --color-stride-light-bg: #F3F3F3;
+  --color-stride-footer-bg: #E8F4FB;
+  --color-stride-border: #E0E0E0;
+  --font-heading: 'Monument Extended', 'DM Sans', sans-serif;
+  --font-body: 'ABCMonumentGrotesk', 'DM Sans', sans-serif;
 }
 
 html {
@@ -12,13 +20,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-}
-
 input:focus {
-  border-color: #2127C3 !important;
+  border-color: var(--color-stride-blue) !important;
   outline: none;
 }
 
