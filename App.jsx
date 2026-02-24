@@ -116,7 +116,6 @@ export default function StrideCommunicationPreferences() {
   const [smsConsented, setSmsConsented] = useState(false);
   const [showConsent, setShowConsent] = useState(false);
   const [productExpanded, setProductExpanded] = useState(false);
-  const [showAllProducts, setShowAllProducts] = useState(false);
   const [productOverrides, setProductOverrides] = useState({});
   const [toast, setToast] = useState({ show: false, message: "" });
   const [saveAnim, setSaveAnim] = useState(false);
@@ -149,8 +148,6 @@ export default function StrideCommunicationPreferences() {
   const isCustom = (pid, ch) => productOverrides[`${pid}_${ch}`] != null;
   const hasAnyCustom = (pid) => isCustom(pid, "email") || isCustom(pid, "sms");
 
-  const visibleProducts = showAllProducts ? STRIDE_BRANDS : STRIDE_BRANDS.filter(p => p.interacted);
-  const interactedCount = STRIDE_BRANDS.filter(p => p.interacted).length;
   const customCount = STRIDE_BRANDS.filter(p => hasAnyCustom(p.id)).length;
 
   return (
@@ -361,12 +358,12 @@ export default function StrideCommunicationPreferences() {
             >
               <div className="flex items-center gap-3">
                 <h2 className="text-xs font-bold tracking-[0.12em] uppercase text-stride-muted border-b-2 border-stride-light-blue pb-2.5">
-                  Brand Preferences
+                  Product Preferences
                 </h2>
                 {customCount > 0 && <Badge text={`${customCount} customized`} variant="custom" />}
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="text-xs text-stride-muted hidden sm:inline">{interactedCount} brands</span>
+                <span className="text-xs text-stride-muted hidden sm:inline">{STRIDE_BRANDS.length} products</span>
                 <span
                   className="text-sm text-stride-muted transition-transform duration-300 inline-block"
                   style={{ transform: productExpanded ? "rotate(180deg)" : "rotate(0)" }}
@@ -384,11 +381,11 @@ export default function StrideCommunicationPreferences() {
               }}
             >
               <p className="text-[13px] text-stride-muted mb-5 leading-relaxed">
-                Override global settings for individual Stride brands. Unmodified brands follow your global preferences above.
+                Override global settings for individual Stride products. Unmodified products follow your global preferences above.
               </p>
 
               <div className="flex flex-col gap-2">
-                {visibleProducts.map((product, idx) => {
+                {STRIDE_BRANDS.map((product, idx) => {
                   const emailVal = getVal(product.id, "email");
                   const smsVal = getVal(product.id, "sms");
                   const emailC = isCustom(product.id, "email");
@@ -467,19 +464,7 @@ export default function StrideCommunicationPreferences() {
                 })}
               </div>
 
-              {!showAllProducts ? (
-                <button onClick={() => setShowAllProducts(true)}
-                  className="w-full mt-3 p-4 text-center text-xs text-stride-muted border border-dashed border-stride-border bg-white cursor-pointer font-body tracking-wide transition-colors hover:border-stride-blue hover:text-stride-blue"
-                >
-                  Show all {STRIDE_BRANDS.length} brands ({STRIDE_BRANDS.length - interactedCount} you haven't used yet)
-                </button>
-              ) : (
-                <button onClick={() => setShowAllProducts(false)}
-                  className="w-full mt-2 p-2.5 text-center text-xs text-stride-muted border-none bg-transparent cursor-pointer font-body"
-                >
-                  Show only brands I've used
-                </button>
-              )}
+
             </div>
           </div>
 
