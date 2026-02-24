@@ -183,7 +183,7 @@ export default function StrideCommunicationPreferences() {
               Communication Settings
             </h1>
             <p className="text-[15px] text-stride-muted leading-relaxed">
-              Control how we reach you across all Stride products. Set global defaults or fine-tune notifications for each brand individually.
+              Control how we reach you across all Stride products. Set global defaults or fine-tune notifications for each product individually.
             </p>
           </div>
 
